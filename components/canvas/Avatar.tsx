@@ -33,7 +33,7 @@ const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
         <primitive
           object={avatar}
           scale={isMobile ? 0.8 : 1.7}
-          position={isMobile ? [0, 0.4, 0] : [0.5, -1.3, 0]}
+          position={isMobile ? [0, 0.4, 0] : [0.5, -1.5, 0]}
           // rotation={[0, 0, 0]}
           // position-y={-1.3}
         />
@@ -68,7 +68,7 @@ const AvatarCanvas: React.FC = () => {
       frameloop="always"
       shadows
       dpr={[1, 2]}
-      camera={{ position: [0, 3.5, 4], fov: 40 }}
+      camera={{ position: [0, 2, 4], fov: 40 }}
       gl={{ preserveDrawingBuffer: true }}
     >
       {/* camera={
