@@ -7,10 +7,7 @@ import { SectionWrapper } from "@/hoc/page";
 
 const ProjectCard = ({ key, object, index }: any) => {
   return (
-    <motion.div
-      variants={fadeIn("up", "spring", index * 0.25, 0.5)}
-      className="text-white"
-    >
+    <div className="text-white">
       <Tilt
         transitionSpeed={1000}
         tiltMaxAngleX={10}
@@ -62,7 +59,7 @@ const ProjectCard = ({ key, object, index }: any) => {
           ))}
         </div>
       </Tilt>
-    </motion.div>
+    </div>
   );
 };
 
@@ -72,26 +69,23 @@ const Project = ({ data }: any) => {
 
   return (
     <>
-      <motion.div variants={textVariant(0.5)} className="mt-20">
+      <div className="mt-20">
         <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
           What I did?
         </p>
         <h2 className="text-[20px] font-black text-[#d3d3d3] xs:text-[40px] sm:text-[50px] md:text-[60px]">
           Projects
         </h2>
-      </motion.div>
+      </div>
 
       <div className="flex w-full">
-        <motion.p
-          variants={fadeIn("", "", 0.1, 0.5)}
-          className="mt-3 max-w-3xl text-[17px] leading-[30px] text-[#aaa6c3]"
-        >
+        <p className="mt-3 max-w-3xl text-[17px] leading-[30px] text-[#aaa6c3]">
           Following projects showcases my skills and experience through
           real-world examples of my work. Each project is briefly described with
           links to code repositories and live demos in it. It reflects my
           ability to solve complex problems, work with different technologies,
           and manage projects effectively.
-        </motion.p>
+        </p>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-7">

@@ -33,7 +33,7 @@ const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
         <primitive
           object={avatar}
           scale={isMobile ? 0.8 : 1.7}
-          position={isMobile ? [0, 0.4, 0] : [0.5, -1.5, 0]}
+          position={isMobile ? [0.1, 0, 0] : [0.5, -1.5, 0]}
           // rotation={[0, 0, 0]}
           // position-y={-1.3}
         />
