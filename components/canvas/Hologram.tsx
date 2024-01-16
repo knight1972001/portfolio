@@ -5,14 +5,7 @@ import {
   OrbitControls,
   Preload,
   useAnimations,
-  useFBX,
   useGLTF,
-  Sparkles,
-  ContactShadows,
-  MeshReflectorMaterial,
-  MeshRefractionMaterial,
-  RenderTexture,
-  Effects,
 } from "@react-three/drei";
 import CanvasLoader from "./Loader";
 import {

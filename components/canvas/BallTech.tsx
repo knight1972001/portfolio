@@ -4,20 +4,12 @@ import {
   Preload,
   View,
   useTexture,
-  OrbitControls,
-  PivotControls,
-  TransformControls,
   PresentationControls,
 } from "@react-three/drei";
-import { Canvas, extend } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useState } from "react";
 import CanvasLoader from "./Loader";
 import useRefs from "react-use-refs";
-import {
-  EffectComposer,
-  Bloom,
-  ToneMapping,
-} from "@react-three/postprocessing";
 
 const BallTech = (props: any) => {
   // console.log(props);
@@ -120,163 +112,166 @@ const BallCanvas = ({ data }: any) => {
       <div ref={view22} className={isMobile ? "view-mobile" : "view"} />
       <div ref={view23} className={isMobile ? "view-mobile" : "view"} />
 
-      <Canvas eventSource={ref} className="canvas">
+      <Canvas
+        eventSource={ref as React.MutableRefObject<HTMLElement>}
+        className="canvas"
+      >
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view1}>
+          <View track={view1 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[0].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view2}>
+          <View track={view2 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[1].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view3}>
+          <View track={view3 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[2].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view4}>
+          <View track={view4 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[3].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view5}>
+          <View track={view5 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[4].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view6}>
+          <View track={view6 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[5].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view7}>
+          <View track={view7 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[6].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view8}>
+          <View track={view8 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[7].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view9}>
+          <View track={view9 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[8].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view10}>
+          <View track={view10 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[9].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view11}>
+          <View track={view11 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[10].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view12}>
+          <View track={view12 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[11].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view13}>
+          <View track={view13 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[12].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view14}>
+          <View track={view14 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[13].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view15}>
+          <View track={view15 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[14].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view16}>
+          <View track={view16 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[15].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view17}>
+          <View track={view17 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[16].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view18}>
+          <View track={view18 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[17].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view19}>
+          <View track={view19 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[18].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view20}>
+          <View track={view20 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[19].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view21}>
+          <View track={view21 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[20].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view22}>
+          <View track={view22 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[21].icon}`} />
             </PresentationControls>
           </View>
         </Suspense>
         <Suspense fallback={<CanvasLoader />}>
-          <View track={view23}>
+          <View track={view23 as React.MutableRefObject<HTMLElement>}>
             <PresentationControls>
               <BallTech imgUrl={`/tech/${data[22].icon}`} />
             </PresentationControls>

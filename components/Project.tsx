@@ -4,14 +4,11 @@ import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { fadeIn, textVariant } from "@/utils/motion";
 import { SectionWrapper } from "@/hoc/page";
-import { useEffect, useState } from "react";
-import { getAllProject } from "../actions/actionsDB";
-import Loading from "./Loading";
 
 const ProjectCard = ({ key, object, index }: any) => {
   return (
     <motion.div
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      variants={fadeIn("up", "spring", index * 0.25, 0.5)}
       className="text-white"
     >
       <Tilt

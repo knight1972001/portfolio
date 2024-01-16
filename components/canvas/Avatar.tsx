@@ -34,7 +34,7 @@ const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
           object={avatar}
           scale={isMobile ? 0.8 : 1.7}
           position={isMobile ? [0, 0.4, 0] : [0.5, -1.3, 0]}
-          rotation={[0, 0, 0]}
+          // rotation={[0, 0, 0]}
           // position-y={-1.3}
         />
       </group>
@@ -78,12 +78,6 @@ const AvatarCanvas: React.FC = () => {
       } */}
       <Suspense fallback={<CanvasLoader />}>
         {/* <OrbitControls enableZoom={false} maxPolarAngle={2} minPolarAngle={1} /> */}
-        <OrbitControls
-          enableZoom={false}
-          maxPolarAngle={0}
-          minPolarAngle={1}
-          enableRotate={true}
-        />
         <Avatar isMobile={isMobile} />
         <Preload all />
       </Suspense>
