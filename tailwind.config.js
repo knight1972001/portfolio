@@ -54,6 +54,7 @@ module.exports = {
       },
       boxShadow: {
         card: "0px 20px 40px -10px #211e35",
+        custom: "-1px 1px 3px #4267B2",
       },
       screens: {
         xs: "450px",
@@ -77,6 +78,16 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      skew: {
+        30: "30deg",
+      },
+      spacing: {
+        5: "5px",
+        10: "10px",
+        15: "15px",
+        20: "20px",
+      },
+      translate: ["group-hover"],
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -6,6 +6,7 @@ import {
   getAllTech,
 } from "@/actions/actionsDB";
 import Loading from "@/components/Loading";
+import SocialMedia from "@/components/SocialMedia";
 import {
   About,
   Contact,
@@ -128,6 +129,7 @@ const HomePage = () => {
           <Contact />
           <StarsCanvas />
         </div>
+        <SocialMedia />
       </div>
     </div>
   );
