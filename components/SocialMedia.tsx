@@ -26,6 +26,16 @@ const SocialMedia = () => {
   return (
     <>
       <div className="flex flex-wrap justify-center">
+        <div className="mb-16 inline-flex flex-wrap justify-center">
+          <a href="./Resume Long Nguyen.pdf" target="_blank">
+            <button className="w-fit rounded-xl bg-[#222831] px-8 py-3 font-bold text-white shadow-md shadow-primary outline-none">
+              VIEW RESUME
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap justify-center">
         <div className="mb-24 inline-flex flex-wrap justify-center">
           {icons.map((icon) => (
             <>

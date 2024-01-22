@@ -17,7 +17,10 @@ const ProjectCard = ({ key, object, index }: any) => {
         glareMaxOpacity={0.4}
         scale={1.06}
       >
-        <div className="inner-element relative h-[230px] w-full">
+        <div
+          className="inner-element relative h-[230px] w-full"
+          onClick={() => window.open(object.source_code_link, "_blank")}
+        >
           <img
             src={`/projects/${object.image}`}
             alt={object.name}
@@ -27,7 +30,7 @@ const ProjectCard = ({ key, object, index }: any) => {
           <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
             <div
               onClick={() => window.open(object.source_code_link, "_blank")}
-              className="black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+              className="black-gradient flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full"
             >
               <img
                 src={`./github.png`}
@@ -38,8 +41,12 @@ const ProjectCard = ({ key, object, index }: any) => {
           </div>
         </div>
 
-        <div className="inner-element mt-5">
+        <div
+          className="inner-element mt-5"
+          onClick={() => window.open(object.source_code_link, "_blank")}
+        >
           <h3 className="text-[24px] font-bold text-white">{object.name}</h3>
+          <h4 className="text-[15px] text-[#BED754]">{object.tech}</h4>
           {object.description.map((item: string, index: number) => (
             <p className="mt-2 text-[14px] text-[#aaa6c3]" key={index}>
               {item}

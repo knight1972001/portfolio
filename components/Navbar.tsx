@@ -52,7 +52,12 @@ const Narbar = () => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="./Resume Long Nguyen.pdf" legacyBehavior passHref>
+            <Link
+              href="./Resume Long Nguyen.pdf"
+              target="_blank"
+              legacyBehavior
+              passHref
+            >
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Resume
               </NavigationMenuLink>
@@ -106,7 +111,12 @@ const Narbar = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="./Resume Long Nguyen.pdf" legacyBehavior passHref>
+                <Link
+                  href="./Resume Long Nguyen.pdf"
+                  target="_blank"
+                  legacyBehavior
+                  passHref
+                >
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Resume
                   </NavigationMenuLink>
