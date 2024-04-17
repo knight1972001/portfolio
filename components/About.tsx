@@ -6,6 +6,7 @@ import Tilt from "react-parallax-tilt";
 import { fadeIn, textVariant } from "@/utils/motion";
 import { about } from "@/data/data";
 import { SectionWrapper } from "@/hoc/page";
+import Link from "next/link";
 
 const AboutCard = ({
   index,
@@ -49,7 +50,7 @@ const AboutCard = ({
 
 const About = () => {
   return (
-    <>
+    <div>
       <motion.div variants={textVariant(0.75)}>
         <p className=" text-[14px] uppercase tracking-wider text-[#d3d3d3] sm:text-[18px]">
           Introduction
@@ -81,7 +82,7 @@ const About = () => {
           <AboutCard key={service.title} index={index} {...service} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -4,8 +4,17 @@ import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { fadeIn, textVariant } from "@/utils/motion";
 import { SectionWrapper } from "@/hoc/page";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProjectCard = ({ key, object, index }: any) => {
+  const router = useRouter();
+
+  const handleClick = (id: any) => {
+    console.log("Clicking /project/" + id);
+    router.push(`/project/${id}`);
+  };
+
   return (
     <div className="text-white">
       <Tilt
@@ -43,7 +52,9 @@ const ProjectCard = ({ key, object, index }: any) => {
 
         <div
           className="inner-element mt-5"
-          onClick={() => window.open(object.source_code_link, "_blank")}
+          onClick={() => {
+            handleClick(object._id);
+          }}
         >
           <h3 className="text-[24px] font-bold text-white">{object.name}</h3>
           <h4 className="text-[15px] text-[#BED754]">{object.tech}</h4>

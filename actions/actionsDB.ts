@@ -121,6 +121,48 @@ export const getAllProject = async () => {
     }
 }
 
+export const getProjectById = async (id: string) => {
+    try {
+        console.log("Getting Project by id: " + id)
+        const apiURL = process.env.MONGODB_API + `action/findOne?timestamp=${Date.now()}`
+        // console.log(apiURL)
+        if (!apiURL) {
+            throw new Error("API URL is not defined in the config")
+        }
+
+        const headers: any = {
+            'Content-Type': 'application/ejson',
+            'Accept': 'application/json',
+            'api-key': process.env.MONGDODB_API_KEY,
+            'Cache-Control': 'no-store, max-age=0'
+            // Add any other headers as needed
+        };
+
+        const requestBody = {
+            // Add your request body data here
+            dataSource: 'portfolio',
+            database: 'portfolio',
+            collection: 'projects',
+            filter: {
+                _id: { $oid: id }
+            }
+        };
+
+        const response = await fetch(apiURL, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(requestBody),
+        });
+
+        // Assuming you want to parse the response as JSON
+        const responseData = await response.json();
+        // console.log(responseData.documents)
+        return responseData.document
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 export const getAllFeedback = async () => {
     try {
         console.log("Getting all Feedback")

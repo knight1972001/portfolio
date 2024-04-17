@@ -65,7 +65,7 @@ const Experience = ({ data }: any) => {
   const experience = data.data;
 
   return (
-    <>
+    <div>
       <motion.div variants={textVariant(0.5)}>
         <p className="text-[14px] uppercase tracking-wider text-[#d3d3d3] sm:text-[18px]">
           what I have done so far?
@@ -85,7 +85,7 @@ const Experience = ({ data }: any) => {
           ))}
         </VerticalTimeline>
       </div>
-    </>
+    </div>
   );
 };
 

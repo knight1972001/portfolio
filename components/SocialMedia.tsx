@@ -24,8 +24,8 @@ const SocialMedia = () => {
   ];
 
   return (
-    <>
-      <div className="flex flex-wrap justify-center">
+    <div>
+      <div className="flex flex-wrap justify-center py-5">
         <div className="mb-16 inline-flex flex-wrap justify-center">
           <a href="./Resume Long Nguyen.pdf" target="_blank">
             <button className="w-fit rounded-xl bg-[#222831] px-8 py-3 font-bold text-white shadow-md shadow-primary outline-none">
@@ -97,7 +97,7 @@ const SocialMedia = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

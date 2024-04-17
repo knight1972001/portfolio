@@ -18,6 +18,7 @@ import {
   StarsCanvas,
   Tech,
 } from "@/components/page";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const HomePage = () => {

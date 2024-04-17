@@ -14,7 +14,7 @@ const Tech = ({ data }: any) => {
   const techData = data.data;
 
   return (
-    <>
+    <div>
       <div className="mt-20">
         <p className=" text-[14px] uppercase tracking-wider text-secondary sm:text-[18px]">
           What I am using?
@@ -27,7 +27,7 @@ const Tech = ({ data }: any) => {
       <div className="flex flex-row flex-wrap justify-center gap-10">
         <BallCanvas data={techData} />
       </div>
-    </>
+    </div>
   );
 };
 
