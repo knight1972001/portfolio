@@ -175,7 +175,12 @@ const ProjectPage = ({
             {/* <Skeleton className="h-[350px]" /> */}
 
             {/* Using Image component */}
-            <div className="image-container relative bg-black/10 backdrop:backdrop-blur-sm">
+            <div
+              className="image-container relative overflow-hidden bg-black/10 backdrop:backdrop-blur-sm"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
               <Image
                 src={`/projects/${projectData.image}`}
                 alt="source code"
@@ -185,7 +190,7 @@ const ProjectPage = ({
             </div>
 
             <div className="mx-9 my-40 space-y-2 sm:mx-[25vw]">
-              <h1 className="text-left font-bold text-white">
+              <h1 className="whitespace-normal text-left font-bold text-white">
                 {projectData.name}
               </h1>
 
@@ -206,12 +211,29 @@ const ProjectPage = ({
               </div>
 
               {/* Render Markdown */}
-              <div className="justify-center py-10 text-[1rem] text-white">
+              <div className="wrap justify-center py-10 text-[0.8rem] text-white sm:text-[1rem]">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {projectDataDetail}
                 </ReactMarkdown>
               </div>
               {/* Using Render Markdown */}
+
+              <div
+                className="text-[20px] text-white underline"
+                onClick={() =>
+                  window.open(projectData.source_code_link, "_blank")
+                }
+              >
+                <h4>
+                  {" "}
+                  <img
+                    src={`../github.png`}
+                    alt="source code"
+                    className="h-[20px] w-[20px] object-contain"
+                  />
+                  Link Source{" "}
+                </h4>
+              </div>
             </div>
           </div>
         </div>

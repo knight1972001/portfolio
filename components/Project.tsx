@@ -28,7 +28,7 @@ const ProjectCard = ({ key, object, index }: any) => {
       >
         <div
           className="inner-element relative h-[230px] w-full"
-          onClick={() => window.open(object.source_code_link, "_blank")}
+          onClick={() => handleClick(object._id)}
         >
           <img
             src={`/projects/${object.image}`}
