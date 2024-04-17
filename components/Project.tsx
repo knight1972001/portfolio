@@ -58,11 +58,14 @@ const ProjectCard = ({ key, object, index }: any) => {
         >
           <h3 className="text-[24px] font-bold text-white">{object.name}</h3>
           <h4 className="text-[15px] text-[#BED754]">{object.tech}</h4>
-          {object.description.map((item: string, index: number) => (
+          {/* {object.description.map((item: string, index: number) => (
             <p className="mt-2 text-[14px] text-[#aaa6c3]" key={index}>
               {item}
             </p>
-          ))}
+          ))} */}
+          <p className="mt-2 text-[14px] text-[#aaa6c3]" key={index}>
+            {object.description[0]}
+          </p>
         </div>
 
         <div className="inner-element absolute bottom-0 mb-6 flex flex-wrap gap-2">

@@ -7,5 +7,5 @@ export default function ProjectPageStatic({
 }) {
   console.log(`Into ${id} static`);
 
-  return <ProjectPage id={id} />;
+  return <ProjectPage id={id} standalone={true} />;
 }

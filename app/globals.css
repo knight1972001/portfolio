@@ -215,4 +215,56 @@ html {
   display: contents;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold; /* Set font weight to bold */
+}
+
+code {
+  background: #161b22a2;
+  text-align: left;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+}
 /* TECH BALL */
+
+/* Project Page & Idea Standalone */
+
+.standalone {
+  background: #232d3f;
+  /* Defining linear gradient with stops at 0%, 50%, 60%, 80%, and 100% */
+  background: linear-gradient(
+    50deg,
+    #0f172a 0%,
+    #0f182d 55%,
+    #18324f 60%,
+    #1b2447 70%,
+    #0f172a 100%
+  );
+  /* Vendor prefixes for webkit browsers */
+  background: -webkit-linear-gradient(
+    50deg,
+    #0f172a 0%,
+    #0f182d 55%,
+    #18324f 60%,
+    #1b2447 70%,
+    #0f172a 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.image-container {
+  width: 100vw; /* Set width equal to viewport width */
+  height: 350px; /* Set height to 50px */
+}
+
+@media (max-width: 375px) {
+  .image-container {
+    width: 100vw; /* Set width equal to viewport width */
+    height: 200px; /* Set height to 100px */
+  }
+}
+
+/* Project Page & Idea Standalone */

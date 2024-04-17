@@ -12,7 +12,7 @@ export default function ModalProject({
 
   return (
     <Modal>
-      <ProjectPage id={projectId} />
+      <ProjectPage id={projectId} standalone={false} />
     </Modal>
   );
 }
