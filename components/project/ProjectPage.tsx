@@ -41,7 +41,7 @@ const ProjectPage = ({ id }: any) => {
   }
 
   return (
-    <div className="min-w-screen bg-blue relative min-h-screen text-3xl sm:bg-black">
+    <div className="min-w-screen relative min-h-screen bg-black text-3xl sm:bg-black">
       <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
         <div
           onClick={() => router.push("https://longnguyen-vhoang.vercel.app/")}

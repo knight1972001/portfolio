@@ -43,10 +43,10 @@ const Feedbacks = ({ data }: any) => {
       >
         <motion.div variants={textVariant()}>
           <p className="text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
-            What others say
+            My coming
           </p>
           <h2 className="text-[20px] font-black text-white xs:text-[40px] sm:text-[50px] md:text-[60px]">
-            Feedback.
+            ideas...
           </h2>
         </motion.div>
       </div>

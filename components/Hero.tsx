@@ -27,7 +27,7 @@ const Hero = () => {
             <Typewriter
               options={{
                 strings:
-                  "QA Automation Developer | Open for full-time roles in QA & Software Developer | Computer Programming & Analysis Advanced Diploma Graduated",
+                  "QA Automation Developer | Software Developer | Creative Thinker | Visionary ",
                 autoStart: true,
                 cursor: "|",
                 loop: true,
