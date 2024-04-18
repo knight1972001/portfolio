@@ -156,7 +156,7 @@ const ProjectPage = ({
         >
           {standalone && (
             <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
-              <div
+              {/* <div
                 onClick={() =>
                   router.push("https://longnguyen-vhoang.vercel.app/")
                 }
@@ -167,7 +167,17 @@ const ProjectPage = ({
                   alt="source code"
                   className="h-1/2 w-1/2 object-contain"
                 />
-              </div>
+              </div> */}
+
+              <Link href={"/"} prefetch={true}>
+                <div className="black-gradient flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full">
+                  <img
+                    src={`../back.png`}
+                    alt="source code"
+                    className="h-1/2 w-1/2 object-contain"
+                  />
+                </div>
+              </Link>
             </div>
           )}
 
@@ -187,14 +197,7 @@ const ProjectPage = ({
                 layout="fill"
                 objectFit="contain"
               />
-            </div>
-
-            <div className="mx-9 my-40 space-y-2 sm:mx-[25vw]">
-              <h1 className="whitespace-normal text-left font-bold text-white">
-                {projectData.name}
-              </h1>
-
-              <div className="inner-element mb-6 flex flex-wrap gap-2 ">
+              <div className="inner-element card-img_hover absolute inset-0 bottom-0 m-3 mb-6 flex flex-wrap items-end justify-start gap-2">
                 {projectData.tags.map((tag: any, index: number) => (
                   <p
                     key={`${index}-${tag.name}`}
@@ -205,6 +208,13 @@ const ProjectPage = ({
                   </p>
                 ))}
               </div>
+            </div>
+            {/* Using Image component */}
+
+            <div className="mx-9 my-40 space-y-2 sm:mx-[25vw]">
+              <h1 className="whitespace-normal text-left font-bold text-white">
+                {projectData.name}
+              </h1>
 
               <div className="bg-black/30 px-4 py-4 font-serif text-base font-light italic text-[#9babf0] backdrop:backdrop-blur-sm">
                 <h3>Summary: {projectData.description[0]}</h3>

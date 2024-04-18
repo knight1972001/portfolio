@@ -44,7 +44,7 @@ const Hologram = ({ isMobile }: any) => {
   );
 };
 
-useGLTF.preload("./robot_playground/scene.gltf");
+useGLTF.preload("@/robot_playground/scene.gltf");
 // useGLTF.preload("./hologram/scene.gltf");
 // useFBX.preload("./hologram_fbx/source/Hologram_01.fbx");
 

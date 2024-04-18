@@ -51,7 +51,7 @@ const Loading = ({ isMobile }: any) => {
   );
 };
 
-useGLTF.preload("./loading/scene.gltf");
+useGLTF.preload("@/loading/scene.gltf");
 
 const LoadingCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);

@@ -42,7 +42,7 @@ const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
   );
 };
 
-useFBX.preload("./Avatar/Waving.fbx");
+useFBX.preload("@/Avatar/Waving.fbx");
 
 const AvatarCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
