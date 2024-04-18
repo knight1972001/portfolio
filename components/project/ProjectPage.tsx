@@ -197,11 +197,11 @@ const ProjectPage = ({
                 layout="fill"
                 objectFit="contain"
               />
-              <div className="inner-element card-img_hover absolute inset-0 bottom-0 m-3 mb-6 flex flex-wrap items-end justify-start gap-2">
+              <div className="inner-element card-img_hover absolute inset-0 m-3 flex flex-wrap items-end justify-start gap-2">
                 {projectData.tags.map((tag: any, index: number) => (
                   <p
                     key={`${index}-${tag.name}`}
-                    className={`text-[14px]`}
+                    className={`text-[12px]`}
                     style={{ color: tag.color }}
                   >
                     #{tag.name}
