@@ -27,6 +27,11 @@ const ProjectPage = ({
 
   console.log("Going to ProjectPage");
 
+  // const STORE_MARKDOWN = `## Demo
+
+  // ![Local Image](/projects/game-developer/game-dev1.png)
+  // ![Local Image](/projects/game-developer/game-dev2.png)`;
+
   function updateImageLinks(
     markdownText: string,
     githubSource: string,
@@ -35,22 +40,24 @@ const ProjectPage = ({
     const matches = Array.from(markdownText.matchAll(imageRegex));
     let updatedMarkdown = markdownText;
 
-    if (githubSource.includes("main")) {
-      const link = githubSource.replace("tree", "raw");
-      for (const match of matches) {
-        const originalLink = match[2];
-        const fullLink = originalLink.startsWith("http")
-          ? originalLink
-          : `${link}/${originalLink}`;
-        updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
-      }
-    } else {
-      for (const match of matches) {
-        const originalLink = match[2];
-        const fullLink = originalLink.startsWith("http")
-          ? originalLink
-          : `${githubSource}/raw/master/${originalLink}`;
-        updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+    if (githubSource.includes("github")) {
+      if (githubSource.includes("main")) {
+        const link = githubSource.replace("tree", "raw");
+        for (const match of matches) {
+          const originalLink = match[2];
+          const fullLink = originalLink.startsWith("http")
+            ? originalLink
+            : `${link}/${originalLink}`;
+          updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+        }
+      } else {
+        for (const match of matches) {
+          const originalLink = match[2];
+          const fullLink = originalLink.startsWith("http")
+            ? originalLink
+            : `${githubSource}/raw/master/${originalLink}`;
+          updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+        }
       }
     }
 
