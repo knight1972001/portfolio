@@ -245,7 +245,11 @@ const ProjectPage = ({
                   window.open(projectData.source_code_link, "_blank")
                 }
               >
-                <h4>
+                <h4
+                  onClick={() =>
+                    window.open(projectData.source_code_link, "_blank")
+                  }
+                >
                   {" "}
                   <img
                     src={`../github.png`}
