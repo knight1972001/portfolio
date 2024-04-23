@@ -36,11 +36,12 @@ const ProjectPage = ({
     let updatedMarkdown = markdownText;
 
     if (githubSource.includes("main")) {
+      const link = githubSource.replace("tree", "raw");
       for (const match of matches) {
         const originalLink = match[2];
         const fullLink = originalLink.startsWith("http")
           ? originalLink
-          : `${githubSource}/raw/main/${originalLink}`;
+          : `${link}/${originalLink}`;
         updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
       }
     } else {
