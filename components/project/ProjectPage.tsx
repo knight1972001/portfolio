@@ -35,12 +35,22 @@ const ProjectPage = ({
     const matches = Array.from(markdownText.matchAll(imageRegex));
     let updatedMarkdown = markdownText;
 
-    for (const match of matches) {
-      const originalLink = match[2];
-      const fullLink = originalLink.startsWith("http")
-        ? originalLink
-        : `${githubSource}/raw/master/${originalLink}`;
-      updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+    if (githubSource.includes("master")) {
+      for (const match of matches) {
+        const originalLink = match[2];
+        const fullLink = originalLink.startsWith("http")
+          ? originalLink
+          : `${githubSource}/raw/master/${originalLink}`;
+        updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+      }
+    } else {
+      for (const match of matches) {
+        const originalLink = match[2];
+        const fullLink = originalLink.startsWith("http")
+          ? originalLink
+          : `${githubSource}/raw/main/${originalLink}`;
+        updatedMarkdown = updatedMarkdown.replace(originalLink, fullLink);
+      }
     }
 
     return updatedMarkdown;
