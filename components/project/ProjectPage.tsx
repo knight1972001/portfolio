@@ -240,26 +240,19 @@ const ProjectPage = ({
               </div>
               {/* Using Render Markdown */}
 
-              <div
-                className="text-[20px] text-white underline"
-                onClick={() =>
-                  window.open(projectData.source_code_link, "_blank")
-                }
-              >
-                <h4
-                  onClick={() =>
-                    window.open(projectData.source_code_link, "_blank")
-                  }
-                >
-                  {" "}
-                  <img
-                    src={`../github.png`}
-                    alt="source code"
-                    className="h-[20px] w-[20px] object-contain"
-                  />
-                  Link Source{" "}
-                </h4>
-              </div>
+              <Link href={projectData.source_code_link} prefetch={true}>
+                <div className="text-[20px] text-white underline">
+                  <h4>
+                    {" "}
+                    <img
+                      src={`../github.png`}
+                      alt="source code"
+                      className="h-[20px] w-[20px] object-contain"
+                    />
+                    Link Source{" "}
+                  </h4>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
