@@ -240,10 +240,12 @@ const ProjectPage = ({
 
               {/* Render Markdown */}
               <div className="wrap justify-center py-10 text-[0.8rem] text-white sm:text-[1rem]">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {projectDataDetail}
-                  {/* {STORE_MARKDOWN} */}
-                </ReactMarkdown>
+                <article className="prose prose-invert prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {projectDataDetail}
+                    {/* {STORE_MARKDOWN} */}
+                  </ReactMarkdown>
+                </article>
               </div>
               {/* Using Render Markdown */}
 
