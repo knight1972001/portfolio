@@ -27,7 +27,7 @@ const Hero = () => {
             <Typewriter
               options={{
                 strings:
-                  "QA Automation Developer | Software Developer | Creative Thinker | Visionary ",
+                  "Automation Developer | AI Developer | Software Developer | Creative Thinker | Visionary ",
                 autoStart: true,
                 cursor: "|",
                 loop: true,
