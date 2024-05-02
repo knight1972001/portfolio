@@ -11,7 +11,7 @@ import {
   About,
   Contact,
   Experience,
-  Feedbacks,
+  Ideas,
   Hero,
   Navbar,
   Project,
@@ -25,7 +25,7 @@ const HomePage = () => {
   const [experienceData, setExperience] = useState<any>();
   const [techData, setTech] = useState<any>();
   const [projectData, setProject] = useState<any>();
-  const [feedbackData, setFeedback] = useState<any>();
+  const [ideaData, setIdea] = useState<any>();
   const [isLoadExp, setLoadExp] = useState(true);
   const [isLoadTech, setLoadTech] = useState(true);
   const [isLoadProject, setLoadProject] = useState(true);
@@ -93,7 +93,7 @@ const HomePage = () => {
       // console.log(foundConversation)
       // Update the state with the found conversation
       if (res != undefined) {
-        setFeedback(res);
+        setIdea(res);
         setLoadFeedback(false);
       }
       // Update the state with the fetched conversation
@@ -125,7 +125,7 @@ const HomePage = () => {
         <Experience data={experienceData} />
         <Tech data={techData} />
         <Project data={projectData} />
-        <Feedbacks data={feedbackData} />
+        <Ideas data={ideaData} />
         <div className="relative z-0">
           <Contact />
           <StarsCanvas />

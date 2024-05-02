@@ -1,7 +1,7 @@
 import About from "./About";
 import Contact from "./Contact";
 import Experience from "./Experience";
-import Feedbacks from "./Feedbacks";
+import Ideas from "./Ideas";
 import Hero from "./Hero";
 import Navbar from "./Navbar";
 import Project from "./Project";
@@ -12,7 +12,7 @@ export {
   About,
   Contact,
   Experience,
-  Feedbacks,
+  Ideas,
   Hero,
   Navbar,
   Project,

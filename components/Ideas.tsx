@@ -8,7 +8,7 @@ import { getAllFeedback } from "../actions/actionsDB";
 import Loading from "./Loading";
 import { SectionWrapper } from "@/hoc/page";
 
-const FeedbackCard = ({ index, item }: any) => (
+const IdeaCard = ({ index, item }: any) => (
   <motion.div
     variants={fadeIn("", "spring", index * 0.5, 0.75)}
     className="dark-gradient-feedback-tag w-full rounded-3xl p-10 xs:w-[320px]"
@@ -35,7 +35,7 @@ const FeedbackCard = ({ index, item }: any) => (
 );
 
 const Feedbacks = ({ data }: any) => {
-  const feedbackData = data.data;
+  const ideaskData = data.data;
   return (
     <div className={`mt-10 rounded-[20px]`}>
       <div
@@ -53,8 +53,8 @@ const Feedbacks = ({ data }: any) => {
       <div
         className={`dark-gradient-feedback flex flex-wrap gap-7 px-6 pb-14 sm:px-16`}
       >
-        {feedbackData.map((item: any, index: any) => (
-          <FeedbackCard key={item.name} index={index} item={item} />
+        {ideaskData.map((item: any, index: any) => (
+          <IdeaCard key={item.name} index={index} item={item} />
         ))}
       </div>
     </div>

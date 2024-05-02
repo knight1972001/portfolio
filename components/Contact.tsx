@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { slideIn } from "../utils/motion";
 import HologramCanvas from "./canvas/Hologram";
 import emailjs from "@emailjs/browser";
+import { checkValidEmail } from "@/utils/utils";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -27,37 +28,43 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_SERVICE_EMAILJS as string,
-        process.env.NEXT_PUBLIC_TEMPLATE_EMAILJS as string,
-        {
-          from_name: form.name,
-          to_name: "Long Nguyen",
-          from_email: form.email,
-          to_email: "knight1972001@gmail.com",
-          message: form.message,
-        },
-        process.env.NEXT_PUBLIC_PUBLIC_KEY_EMAILJS,
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+    if (form.email != "" && checkValidEmail(form.email)) {
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_SERVICE_EMAILJS as string,
+          process.env.NEXT_PUBLIC_TEMPLATE_EMAILJS as string,
+          {
+            from_name: form.name,
+            to_name: "Long Nguyen",
+            from_email: form.email,
+            to_email: "knight1972001@gmail.com",
+            message: form.message,
+          },
+          process.env.NEXT_PUBLIC_PUBLIC_KEY_EMAILJS,
+        )
+        .then(
+          () => {
+            setLoading(false);
+            alert(
+              `Thank you ${form.name}. I will get back to you as soon as possible.`,
+            );
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
+            setForm({
+              name: "",
+              email: "",
+              message: "",
+            });
+          },
+          (error) => {
+            setLoading(false);
+            console.error(error);
 
-          alert("Ahh, something went wrong. Please try again.");
-        },
-      );
+            alert("Ahh, something went wrong. Please try again.");
+          },
+        );
+    } else {
+      alert("Please enter a valid email!");
+    }
   };
 
   return (
