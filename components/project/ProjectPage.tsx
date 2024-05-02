@@ -25,8 +25,6 @@ const ProjectPage = ({
 
   const router = useRouter();
 
-  console.log("Going to ProjectPage");
-
   // const STORE_MARKDOWN = `## Demo
 
   // ![Local Image](/projects/game-developer/game-dev1.png)
@@ -240,7 +238,7 @@ const ProjectPage = ({
 
               {/* Render Markdown */}
               <div className="wrap justify-center py-10 text-[0.8rem] text-white sm:text-[1rem]">
-                <article className="prose prose-invert prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600">
+                <article className="prose prose-invert prose-headings:underline prose-a:text-blue-600 prose-img:rounded-xl">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {projectDataDetail}
                     {/* {STORE_MARKDOWN} */}
