@@ -66,7 +66,7 @@ const Ideas = ({ data }: any) => {
         style={{
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none",
-          "-ms-overflow-style": "none",
+          // "-ms-overflow-style": "none",
         }}
       >
         {/* <motion.div variants={slideIn("left", "spring", 0.5, 1)}>
