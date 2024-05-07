@@ -7,26 +7,28 @@ import { useEffect, useState } from "react";
 import { getAllFeedback } from "../actions/actionsDB";
 import Loading from "./Loading";
 import { SectionWrapper } from "@/hoc/page";
+import { useRouter } from "next/navigation";
+import { slideIn } from "../utils/motion";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const IdeaCard = ({ index, item }: any) => (
-  <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className="dark-gradient-feedback-tag w-full rounded-3xl p-10 xs:w-[320px]"
-  >
-    <p className="text-[30px] font-black text-white">"</p>
+  <motion.div variants={fadeIn("", "spring", index * 0.5, 0.75)}>
+    {/* <p className="text-[30px] font-black text-white">"</p> */}
 
-    <div className="mt-1">
-      <p className="text-[18px] tracking-wider text-white">
-        {item.testimonial}
+    <div className="dark-gradient-feedback-tag mt-1 w-[320px] transform snap-center rounded-3xl p-10 transition-transform duration-300 hover:scale-110 ">
+      <p className="text-[18px] font-bold tracking-wider text-white">
+        {/* {item.testimonial} */}
+        {item.name}
       </p>
 
-      <div className="mt-7 flex items-center justify-between gap-1">
+      <div className="mt-2 flex items-center justify-between gap-1">
         <div className="flex flex-1 flex-col">
           <p className="text-[16px] font-medium text-white">
-            <span className="blue-text-gradient">@</span> {item.name}
+            <span className="blue-text-gradient">@</span> {item.author}
           </p>
-          <p className="mt-1 text-[12px] text-[#aaa6c3]">
-            {item.designation} of {item.company}
+          <p className="mt-4 text-[12px] text-[#aaa6c3]">
+            {/* {item.designation} of {item.company} */}
+            {item.summary}
           </p>
         </div>
       </div>
@@ -34,8 +36,16 @@ const IdeaCard = ({ index, item }: any) => (
   </motion.div>
 );
 
-const Feedbacks = ({ data }: any) => {
-  const ideaskData = data.data;
+const Ideas = ({ data }: any) => {
+  const router = useRouter();
+
+  const ideasData = data.data;
+
+  const handleClick = (id: any) => {
+    console.log("Clicking /idea/" + id);
+    router.push(`/idea/${id}`);
+  };
+
   return (
     <div className={`mt-10 rounded-[20px]`}>
       <div
@@ -50,15 +60,31 @@ const Feedbacks = ({ data }: any) => {
           </h2>
         </motion.div>
       </div>
+
       <div
-        className={`dark-gradient-feedback flex flex-wrap gap-7 px-6 pb-14 sm:px-16`}
+        className={`dark-gradient-feedback flex flex-none snap-x gap-7 overflow-x-auto px-6 pb-14 pt-5 sm:px-16`}
+        style={{
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+          "-ms-overflow-style": "none",
+        }}
       >
-        {ideaskData.map((item: any, index: any) => (
-          <IdeaCard key={item.name} index={index} item={item} />
+        {/* <motion.div variants={slideIn("left", "spring", 0.5, 1)}>
+          
+        </motion.div> */}
+        {ideasData.map((item: any, index: any) => (
+          <motion.div
+            variants={slideIn("left", "spring", index * 0.5, 1)}
+            key={item._id}
+          >
+            <div onClick={() => handleClick(item._id)}>
+              <IdeaCard index={index} item={item} />
+            </div>
+          </motion.div>
         ))}
       </div>
     </div>
   );
 };
 
-export default SectionWrapper(Feedbacks, "");
+export default SectionWrapper(Ideas, "");

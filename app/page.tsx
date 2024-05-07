@@ -2,6 +2,7 @@
 import {
   getAllExperience,
   getAllFeedback,
+  getAllIdeas,
   getAllProject,
   getAllTech,
 } from "@/actions/actionsDB";
@@ -29,7 +30,7 @@ const HomePage = () => {
   const [isLoadExp, setLoadExp] = useState(true);
   const [isLoadTech, setLoadTech] = useState(true);
   const [isLoadProject, setLoadProject] = useState(true);
-  const [isLoadFeedback, setLoadFeedback] = useState(true);
+  const [isLoadIdea, setLoadIdea] = useState(true);
 
   // Animation support
   const [opacity, setOpacity] = useState<number>(1);
@@ -91,21 +92,21 @@ const HomePage = () => {
     }
   };
 
-  const fetchFeedback = async () => {
+  const fetchIdea = async () => {
     try {
-      console.log("Fetching Feedback");
+      console.log("Fetching Ideas");
       // Simulate an asynchronous data fetch
-      const res = await getAllFeedback();
+      const res = await getAllIdeas();
       // console.log(foundConversation)
       // Update the state with the found conversation
       if (res != undefined) {
         setIdea(res);
-        setLoadFeedback(false);
+        setLoadIdea(false);
       }
       // Update the state with the fetched conversation
     } catch (error) {
       console.error("Error fetching data:", error);
-      setLoadFeedback(false);
+      setLoadIdea(false);
     }
   };
 
@@ -113,10 +114,10 @@ const HomePage = () => {
     fetchExperience();
     fetchTech();
     fetchProject();
-    fetchFeedback();
+    fetchIdea();
   }, []);
 
-  if (isLoadExp || isLoadTech || isLoadProject || isLoadFeedback) {
+  if (isLoadExp || isLoadTech || isLoadProject || isLoadIdea) {
     return <Loading />;
   }
 
