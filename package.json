@@ -24,6 +24,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.2.0",
     "react-intersection-observer": "^9.5.3",
     "react-markdown": "^9.0.1",
     "react-parallax-tilt": "^1.7.179",
@@ -32,6 +33,7 @@
     "react-vertical-timeline-component": "^3.6.0",
     "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.1.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.159.0",
     "typewriter-effect": "^2.21.0"
