@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { convertBadgeUrl, countWords } from "@/utils/utils";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const ProjectPage = ({
   id,
@@ -186,12 +188,8 @@ const ProjectPage = ({
               </div> */}
 
               <Link href={"/"} prefetch={true}>
-                <div className="black-gradient flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full">
-                  <img
-                    src={`../back.png`}
-                    alt="source code"
-                    className="h-1/2 w-1/2 object-contain"
-                  />
+                <div className="flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full opacity-75 transition-all duration-300 hover:opacity-100">
+                  <RiArrowGoBackFill size={40} className="text-white" />
                 </div>
               </Link>
             </div>
@@ -213,21 +211,33 @@ const ProjectPage = ({
                 layout="fill"
                 objectFit="contain"
               />
-              <div className="inner-element card-img_hover absolute inset-0 m-3 flex flex-wrap items-end justify-start gap-2">
-                {projectData.tags.map((tag: any, index: number) => (
-                  <p
-                    key={`${index}-${tag.name}`}
-                    className={`text-[12px]`}
-                    style={{ color: tag.color }}
+
+              {!standalone && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80">
+                  <button
+                    className="rounded-lg border border-white bg-transparent p-4 text-lg font-bold text-white transition duration-300 hover:bg-white hover:text-black"
+                    onClick={() => {
+                      window.location.reload();
+                    }}
                   >
-                    #{tag.name}
-                  </p>
+                    Read More
+                  </button>
+                </div>
+              )}
+
+              <div className="flex flex-wrap items-end justify-start gap-2">
+                {projectData.tags.map((tag: any, index: number) => (
+                  <img
+                    src={convertBadgeUrl(tag.name, tag.color)}
+                    key={`${index}-${tag.name}`}
+                    className="opacity-75 transition-all duration-300 hover:opacity-100"
+                  />
                 ))}
               </div>
             </div>
             {/* Using Image component */}
 
-            <div className="mx-9 my-40 space-y-2 sm:mx-[25vw]">
+            <div className="mx-4 my-40 space-y-2 sm:mx-9 md:mx-[15vw]">
               <h1 className="whitespace-normal text-left font-bold text-white">
                 {projectData.name}
               </h1>
@@ -238,7 +248,7 @@ const ProjectPage = ({
 
               {/* Render Markdown */}
               <div className="wrap justify-center py-10 text-[0.8rem] text-white sm:text-[1rem]">
-                <article className="prose prose-invert prose-headings:underline prose-a:text-blue-600 prose-img:rounded-xl">
+                <article className="prose prose-invert max-w-none prose-headings:underline prose-a:text-blue-600 prose-img:rounded-xl">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {projectDataDetail}
                     {/* {STORE_MARKDOWN} */}

@@ -1,3 +1,5 @@
+import IdeaPage from "@/components/idea/IdeaPage";
+
 export default function IdeaPageStatic({
   params: { id },
 }: {
@@ -5,5 +7,5 @@ export default function IdeaPageStatic({
 }) {
   console.log(`Into ${id} static`);
 
-  return <div>Hello from Idea {id}</div>;
+  return <IdeaPage id={id} standalone={true} />;
 }
