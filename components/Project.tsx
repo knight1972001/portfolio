@@ -6,6 +6,7 @@ import { fadeIn, textVariant } from "@/utils/motion";
 import { SectionWrapper } from "@/hoc/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { convertBadgeUrl } from "@/utils/utils";
 
 const ProjectCard = ({ key, object, index }: any) => {
   const router = useRouter();
@@ -70,13 +71,11 @@ const ProjectCard = ({ key, object, index }: any) => {
 
         <div className="inner-element absolute bottom-0 mb-6 flex flex-wrap gap-2">
           {object.tags.map((tag: any, index: number) => (
-            <p
+            <img
+              src={convertBadgeUrl(tag.name, tag.color)}
               key={`${index}-${tag.name}`}
-              className={`text-[14px]`}
-              style={{ color: tag.color }}
-            >
-              #{tag.name}
-            </p>
+              className="opacity-75 transition-all duration-300 hover:opacity-100"
+            />
           ))}
         </div>
       </Tilt>
