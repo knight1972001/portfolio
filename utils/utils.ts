@@ -12,5 +12,10 @@ export const countWords = (content: string): number => {
 }
 
 export const convertBadgeUrl = (name: string, color: string): string => {
-    return `https://img.shields.io/badge/` + name + `-` + color.substring(1);
+    // Split the string into an array of words
+    const words: string[] = name.split('-');
+
+    // Capitalize the first letter of each word and join them back together
+    const capitalizedString: string = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    return `https://img.shields.io/badge/` + capitalizedString + `-` + color.substring(1);
 }
