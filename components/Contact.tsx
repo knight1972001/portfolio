@@ -28,7 +28,7 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (form.email != "" && checkValidEmail(form.email)) {
+    if (form.email != "" && checkValidEmail(form.email) && form.message != "") {
       emailjs
         .send(
           process.env.NEXT_PUBLIC_SERVICE_EMAILJS as string,
