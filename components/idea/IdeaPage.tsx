@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import ContactForm from "./ContactForm";
 import { convertBadgeUrl, countWords } from "@/utils/utils";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { FaSquareGithub } from "react-icons/fa6";
 
 const IdeaPage = ({
   id,
@@ -118,6 +119,12 @@ const IdeaPage = ({
     }
   }, [isShowContent]);
 
+  if (ideaData?.status) {
+    console.log(ideaData.status);
+  } else {
+    console.log("Status is not available.");
+  }
+
   return (
     <div className="min-w-screen relative min-h-screen bg-black">
       <div
@@ -152,6 +159,22 @@ const IdeaPage = ({
                 <h1 className="whitespace-normal text-center font-bold text-white">
                   {ideaData.name}
                 </h1>
+
+                {ideaData?.status && (
+                  <div>
+                    <h4
+                      className={`whitespace-normal text-center text-[15px] font-bold ${
+                        ideaData.status === "In Progress"
+                          ? "text-[#953553]"
+                          : ideaData.status === "Finished"
+                            ? "text-[#008000]"
+                            : "text-white"
+                      }`}
+                    >
+                      {ideaData.status}
+                    </h4>
+                  </div>
+                )}
 
                 <div>
                   <h2 className="whitespace-normal text-left text-[15px] font-thin text-white">
@@ -189,6 +212,39 @@ const IdeaPage = ({
                   </article>
                 </div>
                 {/* Using Render Markdown */}
+
+                {/* Render Markdown */}
+                {ideaData?.progress && (
+                  <div className="wrap items-center justify-center py-10 text-[0.5rem] text-white sm:text-[1rem]">
+                    <h4 className="text-center text-[30px] font-bold text-gray-100 underline">
+                      Progress
+                    </h4>
+                    <article className="prose prose-invert max-w-none prose-headings:underline prose-a:text-blue-600 prose-img:rounded-xl">
+                      {ideaData.progress
+                        .slice() // Make a shallow copy of the array to avoid mutating the original array
+                        .sort((a: any, b: any) => {
+                          const dateA = new Date(
+                            a.time.replace(/(\d+)(st|nd|rd|th)/, "$1"),
+                          );
+                          const dateB = new Date(
+                            b.time.replace(/(\d+)(st|nd|rd|th)/, "$1"),
+                          );
+                          return dateA.getTime() - dateB.getTime();
+                        }) // Sort by the 'time' property
+                        .map((tag: any, index: number) => (
+                          <div key={`${index}`}>
+                            <p className="text-center text-[20px] font-bold text-gray-200 underline hover:text-[30px]">
+                              {tag.time}:
+                            </p>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                              {tag.description}
+                            </ReactMarkdown>
+                          </div>
+                        ))}
+                    </article>
+                  </div>
+                )}
+                {/* Using Render Markdown */}
               </div>
             </div>
 
@@ -206,9 +262,31 @@ const IdeaPage = ({
             )}
           </div>
           {standalone && (
-            <div>
-              <ContactForm />
-            </div>
+            <>
+              {/* SOURCE */}
+              {ideaData?.source && (
+                <div>
+                  <Link href={ideaData.source} prefetch={true}>
+                    <div
+                      className={`space-2 flex items-center justify-center whitespace-normal text-left text-[15px] font-bold ${
+                        ideaData?.status === "In Progress"
+                          ? "text-[#953553]"
+                          : ideaData.status === "Finished"
+                            ? "text-[#008000]"
+                            : "text-white"
+                      }`}
+                    >
+                      <FaSquareGithub size={40} />
+                      <p> Source Code</p>
+                    </div>
+                  </Link>
+                </div>
+              )}
+              {/* SOURCE */}
+              <div>
+                <ContactForm />
+              </div>
+            </>
           )}
         </>
       )}
