@@ -145,7 +145,8 @@ const IdeaPage = ({
             style={{ opacity: opacityContent }}
           >
             {standalone && (
-              <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
+              // <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
+              <div className="flex justify-end">
                 <Link href={"/"} prefetch={true}>
                   <div className="flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full opacity-75 transition-all duration-300 hover:opacity-100">
                     <RiArrowGoBackFill size={40} className="text-white" />

@@ -157,8 +157,13 @@ const ProjectPage = ({
   return (
     <div className="min-w-screen relative min-h-screen bg-black">
       <div
-        className="absolute inset-0 flex items-center justify-center bg-black"
-        style={{ opacity: opacity, display: display }}
+        className={`absolute inset-0 flex items-center justify-center bg-black ${
+          isShowContent ? "hidden" : ""
+        }`}
+        style={{
+          opacity: opacity,
+          display: display,
+        }}
       >
         <img
           src={`/loading/loadingmini.gif`}
@@ -173,20 +178,15 @@ const ProjectPage = ({
           style={{ opacity: opacityContent }}
         >
           {standalone && (
-            <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
-              {/* <div
-                onClick={() =>
-                  router.push("https://longnguyen-vhoang.vercel.app/")
-                }
-                className="black-gradient flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full"
-              >
-                <img
-                  src={`../back.png`}
-                  alt="source code"
-                  className="h-1/2 w-1/2 object-contain"
-                />
-              </div> */}
-
+            // <div className="inner-element card-img_hover absolute inset-0 m-3 flex justify-end">
+            //   <Link href={"/"} prefetch={true}>
+            //     <div className="flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full opacity-75 transition-all duration-300 hover:opacity-100">
+            //       <RiArrowGoBackFill size={40} className="text-white" />
+            //     </div>
+            //   </Link>
+            // </div>
+            // <div className="inner-element card-img_hover absolute inset-0 z-10 m-3 flex justify-end">
+            <div className="flex justify-end">
               <Link href={"/"} prefetch={true}>
                 <div className="flex h-[2.5rem] w-[2.5rem] cursor-pointer items-center justify-center rounded-full opacity-75 transition-all duration-300 hover:opacity-100">
                   <RiArrowGoBackFill size={40} className="text-white" />
