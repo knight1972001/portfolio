@@ -64,17 +64,20 @@ const About = () => {
         variants={fadeIn("", "", 0.5, 1)}
         className="mt-4 w-full text-[17px] leading-[30px] text-[#aaa6c3]"
       >
-        I'm a skilled software developer with experience in OOP languages like
-        C++, Java, and expertise in frameworks like NextJS, AngularJS, NodeJS,
-        etc. With 8 months of full-time co-op experience at the Ministry of
-        Children Community and Social Services Ontario, I have honed my
-        technical skills and developed excellent communication and teamwork
-        abilities. Additionally, I have completed the Google IT Automation
-        Certificate and graduated with an Advanced Diploma in Computer
-        Programming & Analysis from Seneca College. I am a quick learner who is
-        passionate about using cutting-edge technologies and integrating complex
-        AI models. Let's collaborate to create innovative and ethical solutions
-        that make a positive impact on the world.
+        I am a versatile Software Engineer with a proven track record in
+        designing and implementing scalable systems, passionate about bridging
+        robust backend architectures with intuitive frontend experiences.
+        Proficient in Python, JavaScript/TypeScript, and cloud technologies
+        (AWS, Docker, Kubernetes), I optimized high-traffic applications like
+        Intuit’s ProTax backend using Elastic Load Balancer and Auto Scaling,
+        ensuring reliability for 100K+ users. I excel in AI/ML integration,
+        having built a secure, locally-hosted AI chat app and a crypto trading
+        model with 20% ROI. A proactive problem-solver, I combine my Bachelor’s
+        in Software Development with hands-on experience in REST APIs, databases
+        (PostgreSQL, MongoDB), and modern frameworks (React, Spring Boot) to
+        deliver performant, user-centric solutions. Currently pursuing AWS
+        certification, I thrive in collaborative, agile environments and am
+        eager to tackle complex system design challenges.
       </motion.p>
 
       <div className="mb-20 mt-20 flex flex-wrap justify-center gap-10">
