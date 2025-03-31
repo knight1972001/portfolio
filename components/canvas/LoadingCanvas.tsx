@@ -26,7 +26,7 @@ const Loading = ({ isMobile }: any) => {
   // const avatar = useFBX("./hologram_fbx/source/Hologram_01.fbx");
   const group = useRef(null);
   // const avatar = useGLTF("./hologram/scene.gltf");
-  const avatar = useGLTF("./loading/scene.gltf");
+  const avatar = useGLTF("./loading/scene-draco.gltf");
   const animations = avatar.animations;
   const { actions, names } = useAnimations(animations, group);
   // const texture = useLoader(RGBELoader, "/textures/royal_esplanade_1k.hdr");
@@ -51,7 +51,7 @@ const Loading = ({ isMobile }: any) => {
   );
 };
 
-useGLTF.preload("@/loading/scene.gltf");
+useGLTF.preload("@/loading/scene-draco.gltf");
 
 const LoadingCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);

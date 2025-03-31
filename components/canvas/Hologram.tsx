@@ -19,7 +19,7 @@ const Hologram = ({ isMobile }: any) => {
   // const avatar = useFBX("./hologram_fbx/source/Hologram_01.fbx");
   const group = useRef(null);
   // const avatar = useGLTF("./hologram/scene.gltf");
-  const avatar = useGLTF("./robot_playground/scene.gltf");
+  const avatar = useGLTF("./robot_playground/scene-draco.gltf");
   const animations = avatar.animations;
   const { actions, names } = useAnimations(animations, group);
   // const texture = useLoader(RGBELoader, "/textures/royal_esplanade_1k.hdr");
@@ -44,7 +44,7 @@ const Hologram = ({ isMobile }: any) => {
   );
 };
 
-useGLTF.preload("@/robot_playground/scene.gltf");
+useGLTF.preload("@/robot_playground/scene-draco.gltf");
 // useGLTF.preload("./hologram/scene.gltf");
 // useFBX.preload("./hologram_fbx/source/Hologram_01.fbx");
 

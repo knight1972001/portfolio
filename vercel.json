@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/(Avatar|loading|react_logo|robot_playground)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    }
+  ]
+}

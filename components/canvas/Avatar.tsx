@@ -1,14 +1,11 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
   Preload,
-  useFBX,
+  useGLTF,
   useAnimations,
-  Html,
-  useProgress,
 } from "@react-three/drei";
 import CanvasLoader from "./Loader";
 
@@ -17,12 +14,15 @@ interface AvatarProps {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
-  const avatar = useFBX("./Avatar/Waving.fbx");
-  const animations = avatar.animations;
-  const { actions, names } = useAnimations(animations, avatar);
+  const avatar = useGLTF("./Avatar/Waving-draco.glb");
+  const { animations } = avatar; // Extract animations from GLTF
+  const { actions, names } = useAnimations(animations, avatar.scene); // Use scene for animations
 
   useEffect(() => {
-    actions[names[0]]?.play();
+    // Play the first animation if it exists
+    if (names[0]) {
+      actions[names[0]]?.play();
+    }
   }, [actions, names]);
 
   return (
@@ -31,25 +31,20 @@ const Avatar: React.FC<AvatarProps> = ({ isMobile }) => {
       <ambientLight intensity={0.5} />
       <group>
         <primitive
-          object={avatar}
+          object={avatar.scene} // Use scene, not the full GLTF object
           scale={isMobile ? 0.8 : 1.7}
           position={isMobile ? [0.1, 0, 0] : [0.5, -1.5, 0]}
-          // rotation={[0, 0, 0]}
-          // position-y={-1.3}
         />
       </group>
     </mesh>
   );
 };
 
-useFBX.preload("@/Avatar/Waving.fbx");
-
 const AvatarCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
-
     setIsMobile(mediaQuery.matches);
 
     const handleMediaQueryChange = (event: MediaQueryListEvent) => {
@@ -71,18 +66,15 @@ const AvatarCanvas: React.FC = () => {
       camera={{ position: [0, 2, 4], fov: 40 }}
       gl={{ preserveDrawingBuffer: true }}
     >
-      {/* camera={
-        isMobile
-          ? { position: [0, 3.5, 4], fov: 40 }
-          : { position: [0, 3.5, 4], fov: 40, near: 2 }
-      } */}
       <Suspense fallback={<CanvasLoader />}>
-        {/* <OrbitControls enableZoom={false} maxPolarAngle={2} minPolarAngle={1} /> */}
         <Avatar isMobile={isMobile} />
         <Preload all />
       </Suspense>
     </Canvas>
   );
 };
+
+// Preload the GLB file
+useGLTF.preload("/Avatar/Waving-draco.glb");
 
 export default AvatarCanvas;
