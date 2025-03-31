@@ -5,11 +5,11 @@ const about = [{
     title: "Fullstack Developer",
     icon: "./About/fullstack.png"
 }, {
-    title: "Software Developer",
+    title: "Software Engineer",
     icon: "./About/softwaredev.png"
 }, {
     title: "DevOps Engineer",
-    icon: "./About/docker.png"
+    icon: "./About/devops.png"
 }]
 
 export { about }

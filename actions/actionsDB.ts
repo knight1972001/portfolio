@@ -1,8 +1,23 @@
 'use server'
+import { Redis } from "@upstash/redis";
+
+const redisClient = new Redis({
+    url: "https://advanced-ocelot-51931.upstash.io",
+    token: "AcrbAAIjcDE0Y2ZiZmZkZDRiMGU0YTBhYTNmMzAwMDI3MzMzMTcxMHAxMA",
+});
+
 
 export const getAllExperience = async () => {
     try {
-        console.log("Getting all Experience")
+        const cacheKey = "experiences:all";
+        console.log("Getting all Experience");
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached; // No JSON.parse needed
+        }
+
         const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -31,10 +46,16 @@ export const getAllExperience = async () => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.documents
+        const documents = responseData.documents;
+
+        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
+        console.log("Cache miss - Stored in Redis");
+        return documents;
     } catch (err) {
         console.error(err);
     }
@@ -43,9 +64,16 @@ export const getAllExperience = async () => {
 
 export const getAllTech = async () => {
     try {
+        const cacheKey = "tech:all";
         console.log("Getting all Techs")
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached; // No JSON.parse needed
+        }
+
         const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        // console.log(apiURL)
         if (!apiURL) {
             throw new Error("API URL is not defined in the config")
         }
@@ -54,8 +82,6 @@ export const getAllTech = async () => {
             'Content-Type': 'application/ejson',
             'Accept': 'application/json',
             'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
         };
 
         const requestBody = {
@@ -72,10 +98,16 @@ export const getAllTech = async () => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.documents
+        const documents = responseData.documents;
+
+        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
+        console.log("Cache miss - Stored in Redis");
+        return documents;
     } catch (err) {
         console.error(err);
     }
@@ -83,7 +115,15 @@ export const getAllTech = async () => {
 
 export const getAllProject = async () => {
     try {
+        const cacheKey = "project:all";
         console.log("Getting all Projects")
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached; // No JSON.parse needed
+        }
+
         const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -94,12 +134,9 @@ export const getAllProject = async () => {
             'Content-Type': 'application/ejson',
             'Accept': 'application/json',
             'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
         };
 
         const requestBody = {
-            // Add your request body data here
             dataSource: 'portfolio',
             database: 'portfolio',
             collection: 'projects',
@@ -112,10 +149,16 @@ export const getAllProject = async () => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.documents
+        const documents = responseData.documents;
+
+        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
+        console.log("Cache miss - Stored in Redis");
+        return documents;
     } catch (err) {
         console.error(err);
     }
@@ -123,7 +166,15 @@ export const getAllProject = async () => {
 
 export const getProjectById = async (id: string) => {
     try {
-        console.log("Getting Project by id: " + id)
+        const cacheKey = `project:${id}`;
+        console.log("Getting Project by id: " + id);
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached;
+        }
+
         const apiURL = process.env.MONGODB_API + `action/findOne?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -154,10 +205,17 @@ export const getProjectById = async (id: string) => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.document
+        const document = responseData.document;
+
+        await redisClient.setex(cacheKey, 3600, document);
+        console.log("Cache miss - Stored in Redis");
+
+        return document;
     } catch (err) {
         console.error(err);
     }
@@ -165,7 +223,15 @@ export const getProjectById = async (id: string) => {
 
 export const getAllFeedback = async () => {
     try {
+        const cacheKey = "feedback:all";
         console.log("Getting all Feedback")
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached; // No JSON.parse needed
+        }
+
         const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -194,10 +260,16 @@ export const getAllFeedback = async () => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.documents
+        const documents = responseData.documents;
+
+        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
+        console.log("Cache miss - Stored in Redis");
+        return documents;
     } catch (err) {
         console.error(err);
     }
@@ -205,7 +277,16 @@ export const getAllFeedback = async () => {
 
 export const getAllIdeas = async () => {
     try {
+        const cacheKey = "idea:all";
         console.log("Getting all Ideas")
+
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached; // No JSON.parse needed
+        }
+
         const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -234,10 +315,16 @@ export const getAllIdeas = async () => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.documents
+        const documents = responseData.documents;
+
+        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
+        console.log("Cache miss - Stored in Redis");
+        return documents;
     } catch (err) {
         console.error(err);
     }
@@ -245,7 +332,15 @@ export const getAllIdeas = async () => {
 
 export const getIdeaById = async (id: string) => {
     try {
+        const cacheKey = `idea:${id}`;
         console.log("Getting Idea by id: " + id)
+
+        const cached = await redisClient.get(cacheKey);
+        if (cached) {
+            console.log("Cache hit - Returning from Redis");
+            return cached;
+        }
+
         const apiURL = process.env.MONGODB_API + `action/findOne?timestamp=${Date.now()}`
         // console.log(apiURL)
         if (!apiURL) {
@@ -276,10 +371,17 @@ export const getIdeaById = async (id: string) => {
             body: JSON.stringify(requestBody),
         });
 
-        // Assuming you want to parse the response as JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const responseData = await response.json();
-        // console.log(responseData.documents)
-        return responseData.document
+        const document = responseData.document;
+
+        await redisClient.setex(cacheKey, 3600, document);
+        console.log("Cache miss - Stored in Redis");
+
+        return document;
     } catch (err) {
         console.error(err);
     }
