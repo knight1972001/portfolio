@@ -2,8 +2,8 @@
 import { Redis } from "@upstash/redis";
 
 const redisClient = new Redis({
-    url: "https://advanced-ocelot-51931.upstash.io",
-    token: "AcrbAAIjcDE0Y2ZiZmZkZDRiMGU0YTBhYTNmMzAwMDI3MzMzMTcxMHAxMA",
+    url: process.env.REDIS_URL,
+    token: process.env.REDIS_TOKEN,
 });
 
 
