@@ -11,25 +11,37 @@ import { useRouter } from "next/navigation";
 import { slideIn } from "../utils/motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const IdeaCard = ({ index, item }: any) => (
-  <motion.div variants={fadeIn("", "spring", index * 0.5, 0.75)}>
-    {/* <p className="text-[30px] font-black text-white">"</p> */}
+interface FeedbackCardProps {
+  index: number;
+  item: {
+    _id?: string;
+    name?: string;
+    author?: string;
+    summary?: string;
+    [key: string]: any;
+  };
+}
 
-    <div className="dark-gradient-feedback-tag mt-1 w-[320px] transform select-none snap-center rounded-3xl p-10 opacity-80 transition-all duration-300 hover:scale-110 hover:opacity-100 ">
-      <p className="text-[18px] font-bold tracking-wider text-white">
-        {/* {item.testimonial} */}
-        {item.name}
-      </p>
+const FeedbackCard = ({ index, item }: FeedbackCardProps) => (
+  <motion.div
+    variants={fadeIn("", "spring", index * 0.5, 0.75)}
+    className="bg-black-200 w-full rounded-3xl p-10 xs:w-[320px]"
+  >
+    <div className="flex flex-col">
+      <div className="mt-1">
+        <div className="text-[18px] font-bold tracking-wider text-white">
+          {item.name}
+        </div>
 
-      <div className="mt-2 flex items-center justify-between gap-1">
-        <div className="flex flex-1 flex-col">
-          <p className="text-[16px] font-medium text-white">
-            <span className="blue-text-gradient">@</span> {item.author}
-          </p>
-          <p className="mt-4 text-[12px] text-[#aaa6c3]">
-            {/* {item.designation} of {item.company} */}
-            {item.summary}
-          </p>
+        <div className="mt-2 flex items-center justify-between gap-1">
+          <div className="flex flex-1 flex-col">
+            <div className="text-[16px] font-medium text-white">
+              <span className="blue-text-gradient">@</span> {item.author}
+            </div>
+            <div className="mt-4 text-[12px] text-[#aaa6c3]">
+              {item.summary}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -85,7 +97,7 @@ const Ideas = ({ data }: any) => {
         />
         <div
           id="slider"
-          className="transparent scroll scrollbar-hide flex snap-x gap-7 overflow-x-auto scroll-smooth pb-14 pt-5 sm:px-6"
+          className="transparent scroll flex snap-x gap-7 overflow-x-auto scroll-smooth pb-14 pt-5 scrollbar-hide sm:px-6"
         >
           {ideasData.map((item: any, index: any) => (
             <motion.div
@@ -96,7 +108,7 @@ const Ideas = ({ data }: any) => {
                 onClick={() => handleClick(item._id)}
                 className="opacity-75 hover:opacity-100"
               >
-                <IdeaCard index={index} item={item} />
+                <FeedbackCard index={index} item={item} />
               </div>
             </motion.div>
           ))}
@@ -107,34 +119,6 @@ const Ideas = ({ data }: any) => {
           onClick={slideRight}
         />
       </div>
-
-      {/* <div className="relative flex items-center">
-        <FaChevronLeft
-          size={40}
-          className="cursor-pointer text-white opacity-50 hover:opacity-100"
-          onClick={slideLeft}
-        />
-        <div
-          id="slider"
-          className="scroll scrollbar-hide h-full w-full snap-x overflow-x-auto scroll-smooth whitespace-nowrap"
-        >
-          {ideasData.map((item: any, index: any) => (
-            <motion.div
-              variants={slideIn("left", "spring", index * 0.5, 1)}
-              key={item._id}
-            >
-              <div onClick={() => handleClick(item._id)} className="w-[220px]">
-                <IdeaCard index={index} item={item} />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <FaChevronRight
-          size={40}
-          className="cursor-pointer text-white opacity-50 hover:opacity-100"
-          onClick={slideRight}
-        />
-      </div> */}
     </div>
   );
 };

@@ -6,9 +6,9 @@ const Hero = () => {
   return (
     <section className="relative mx-auto h-screen w-full" id="navbar">
       <div className="absolute inset-0 top-[120px] mx-auto flex max-w-7xl flex-row items-start gap-1 px-6 sm:px-16 md:gap-5 ">
-        <div className="mt-5 flex flex-col items-center justify-center">
-          <div className="h-5 w-5 rounded-full bg-[#915eff]" />
-          <div className="violet-gradient h-40 w-1 sm:h-80" />
+        <div className="flex flex-col justify-center items-center mt-5">
+          <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
+          <div className="w-1 sm:h-80 h-40 violet-gradient" />
         </div>
         <div className="w-[300px] sm:w-[800px]">
           <h1 className="mt-2 text-[40px] font-black text-white xs:text-[50px] sm:text-[60px] lg:text-[80px] lg:leading-[98px]">
@@ -26,11 +26,10 @@ const Hero = () => {
           <p className="text-[16px] font-medium text-[#ffffff9a] xs:text-[20px] sm:text-[26px] lg:text-[30px] lg:leading-[40px]">
             <Typewriter
               options={{
-                strings:
-                  "Software Engineer | Full-Stack Developer | QA Automation Engineer",
+                strings: "Software Engineer | Full-Stack Developer ",
                 autoStart: true,
                 cursor: "|",
-                loop: true,
+                loop: false,
                 delay: 25,
                 deleteSpeed: 10,
               }}
