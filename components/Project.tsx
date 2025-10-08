@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { convertBadgeUrl } from "@/utils/utils";
 
-const ProjectCard = ({ key, object, index }: any) => {
+const ProjectCard = ({ object, index }: any) => {
   const router = useRouter();
 
   const handleClick = (id: any) => {
@@ -58,25 +58,9 @@ const ProjectCard = ({ key, object, index }: any) => {
           }}
         >
           <h3 className="text-[24px] font-bold text-white">{object.name}</h3>
-          <h4 className="text-[15px] text-[#BED754]">{object.tech}</h4>
-          {/* {object.description.map((item: string, index: number) => (
-            <p className="mt-2 text-[14px] text-[#aaa6c3]" key={index}>
-              {item}
-            </p>
-          ))} */}
-          <p className="mt-2 text-[14px] text-[#aaa6c3]" key={index}>
+          <p className="mt-2 text-[14px] text-[#aaa6c3]">
             {object.description[0]}
           </p>
-        </div>
-
-        <div className="inner-element absolute bottom-0 mb-6 flex flex-wrap gap-2">
-          {object.tags.map((tag: any, index: number) => (
-            <img
-              src={convertBadgeUrl(tag.name, tag.color)}
-              key={`${index}-${tag.name}`}
-              className="opacity-75 transition-all duration-300 hover:opacity-100"
-            />
-          ))}
         </div>
       </Tilt>
     </div>

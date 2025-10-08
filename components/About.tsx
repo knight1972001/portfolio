@@ -50,42 +50,33 @@ const AboutCard = ({
 
 const About = () => {
   return (
-    <div>
-      <motion.div variants={textVariant(0.75)}>
-        <p className=" text-[14px] uppercase tracking-wider text-[#d3d3d3] sm:text-[18px]">
+    <>
+      <motion.div variants={textVariant()}>
+        <div className="text-[14px] uppercase tracking-wider text-[#d3d3d3] sm:text-[18px]">
           Introduction
-        </p>
-        <h2 className="text-[30px] font-black text-[#d3d3d3] xs:text-[40px] sm:text-[50px] md:text-[60px]">
-          Overview
+        </div>
+        <h2 className="text-[28px] font-bold text-white sm:text-[40px]">
+          Overview.
         </h2>
       </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.5, 1)}
-        className="mt-4 w-full text-[17px] leading-[30px] text-[#aaa6c3]"
+      <motion.div
+        variants={fadeIn("", "", 0.1, 1)}
+        className="max-w-8xl mt-4 text-[17px] leading-[30px] text-[#d3d3d3]"
       >
-        I am a versatile Software Engineer with a proven track record in
-        designing and implementing scalable systems, passionate about bridging
-        robust backend architectures with intuitive frontend experiences.
-        Proficient in Python, JavaScript/TypeScript, and cloud technologies
-        (AWS, Docker, Kubernetes), I optimized high-traffic applications like
-        Intuit’s ProTax backend using Elastic Load Balancer and Auto Scaling,
-        ensuring reliability for 100K+ users. I excel in AI/ML integration,
-        having built a secure, locally-hosted AI chat app and a crypto trading
-        model with 20% ROI. A proactive problem-solver, I combine my Bachelor’s
-        in Software Development with hands-on experience in REST APIs, databases
-        (PostgreSQL, MongoDB), and modern frameworks (React, Spring Boot) to
-        deliver performant, user-centric solutions. Currently pursuing AWS
-        certification, I thrive in collaborative, agile environments and am
-        eager to tackle complex system design challenges.
-      </motion.p>
+        I'm a skilled software developer with experience in TypeScript and
+        JavaScript, and expertise in frameworks like React, Node.js, and
+        Three.js. I'm a quick learner and collaborate closely with clients to
+        create efficient, scalable, and user-friendly solutions that solve
+        real-world problems. Let's work together to bring your ideas to life!
+      </motion.div>
 
-      <div className="mb-20 mt-20 flex flex-wrap justify-center gap-10">
+      {/* <div className="mb-20 mt-20 flex flex-wrap justify-center gap-10">
         {about.map((service, index) => (
           <AboutCard key={service.title} index={index} {...service} />
         ))}
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 };
 

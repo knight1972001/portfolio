@@ -247,13 +247,41 @@ const ProjectPage = ({
               </div>
 
               {/* Render Markdown */}
-              <div className="wrap justify-center py-10 text-[0.8rem] text-white sm:text-[1rem]">
-                <article className="prose prose-invert max-w-none prose-headings:underline prose-a:text-blue-600 prose-img:rounded-xl">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {projectDataDetail}
-                    {/* {STORE_MARKDOWN} */}
-                  </ReactMarkdown>
-                </article>
+              <div className="prose prose-invert max-w-none">
+                <ReactMarkdown
+                  components={{
+                    p: ({ children }) => <div className="mb-4">{children}</div>,
+                    h1: ({ children }) => (
+                      <h1 className="text-3xl font-bold mb-4">{children}</h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="text-2xl font-bold mb-3">{children}</h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="text-xl font-bold mb-2">{children}</h3>
+                    ),
+                    ul: ({ children }) => (
+                      <ul className="list-disc ml-6 mb-4">{children}</ul>
+                    ),
+                    ol: ({ children }) => (
+                      <ol className="list-decimal ml-6 mb-4">{children}</ol>
+                    ),
+                    li: ({ children }) => <li className="mb-1">{children}</li>,
+                    code: ({ children }) => (
+                      <code className="bg-gray-800 px-1 py-0.5 rounded text-sm">
+                        {children}
+                      </code>
+                    ),
+                    pre: ({ children }) => (
+                      <pre className="bg-gray-800 p-4 rounded overflow-x-auto mb-4">
+                        {children}
+                      </pre>
+                    ),
+                  }}
+                >
+                  {projectDataDetail}
+                  {/* {STORE_MARKDOWN} */}
+                </ReactMarkdown>
               </div>
               {/* Using Render Markdown */}
 

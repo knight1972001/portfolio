@@ -1,388 +1,66 @@
 'use server'
-import { Redis } from "@upstash/redis";
 
-const redisClient = new Redis({
-    url: process.env.REDIS_URL,
-    token: process.env.REDIS_TOKEN,
-});
+import { MongoClient, ObjectId } from 'mongodb'
 
+const MONGODB_URI = process.env.MONGODB_URI
+if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI not set in environment')
+}
 
+// Re-use connection across hot reloads (Next.js dev)
+declare global {
+    // eslint-disable-next-line no-var
+    var _mongoClientPromise: Promise<MongoClient> | undefined
+}
+
+let clientPromise: Promise<MongoClient>
+if (!global._mongoClientPromise) {
+    const client = new MongoClient(MONGODB_URI)
+    global._mongoClientPromise = client.connect()
+}
+clientPromise = global._mongoClientPromise
+
+async function getDb(name = 'portfolio') {
+    const client = await clientPromise
+    return client.db(name)
+}
+
+async function findAll(collection: string, database = 'portfolio') {
+    const db = await getDb(database)
+    return db.collection(collection).find({}).sort({ _id: -1 }).toArray()
+}
+
+async function findOne(collection: string, id: string, database = 'portfolio') {
+    if (!ObjectId.isValid(id)) return null
+    const db = await getDb(database)
+    return db.collection(collection).findOne({ _id: new ObjectId(id) })
+}
+
+// Public API (keep same signatures / error swallowing)
 export const getAllExperience = async () => {
     try {
-        const cacheKey = "experiences:all";
-        console.log("Getting all Experience");
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached; // No JSON.parse needed
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
-        };
-
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'portfolio',
-            collection: 'experiences',
-            sort: { _id: -1 }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const documents = responseData.documents;
-
-        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
-        console.log("Cache miss - Stored in Redis");
-        return documents;
-    } catch (err) {
-        console.error(err);
+        const experiences = await findAll('experiences')
+        return experiences
+    } catch (e) {
+        console.error('getAllExperience - Error:', e)
+        return []
     }
 }
 
+export const getAllTech = () =>
+    findAll('tech').catch(e => (console.error(e), []))
 
-export const getAllTech = async () => {
-    try {
-        const cacheKey = "tech:all";
-        console.log("Getting all Techs")
+export const getAllProject = () =>
+    findAll('projects').catch(e => (console.error(e), []))
 
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached; // No JSON.parse needed
-        }
+export const getProjectById = (id: string) =>
+    findOne('projects', id).catch(e => (console.error(e), null))
 
-        const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
+export const getAllFeedback = () =>
+    findAll('feedback').catch(e => (console.error(e), []))
 
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-        };
+export const getAllIdeas = () =>
+    findAll('ideas', 'ideas').catch(e => (console.error(e), []))
 
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'portfolio',
-            collection: 'tech',
-            sort: { _id: -1 }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const documents = responseData.documents;
-
-        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
-        console.log("Cache miss - Stored in Redis");
-        return documents;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const getAllProject = async () => {
-    try {
-        const cacheKey = "project:all";
-        console.log("Getting all Projects")
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached; // No JSON.parse needed
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-        };
-
-        const requestBody = {
-            dataSource: 'portfolio',
-            database: 'portfolio',
-            collection: 'projects',
-            sort: { _id: -1 }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const documents = responseData.documents;
-
-        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
-        console.log("Cache miss - Stored in Redis");
-        return documents;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const getProjectById = async (id: string) => {
-    try {
-        const cacheKey = `project:${id}`;
-        console.log("Getting Project by id: " + id);
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached;
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/findOne?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
-        };
-
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'portfolio',
-            collection: 'projects',
-            filter: {
-                _id: { $oid: id }
-            }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const document = responseData.document;
-
-        await redisClient.setex(cacheKey, 3600, document);
-        console.log("Cache miss - Stored in Redis");
-
-        return document;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const getAllFeedback = async () => {
-    try {
-        const cacheKey = "feedback:all";
-        console.log("Getting all Feedback")
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached; // No JSON.parse needed
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
-        };
-
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'portfolio',
-            collection: 'feedback',
-            sort: { _id: -1 }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const documents = responseData.documents;
-
-        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
-        console.log("Cache miss - Stored in Redis");
-        return documents;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const getAllIdeas = async () => {
-    try {
-        const cacheKey = "idea:all";
-        console.log("Getting all Ideas")
-
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached; // No JSON.parse needed
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/find?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
-        };
-
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'ideas',
-            collection: 'ideas',
-            sort: { _id: -1 }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const documents = responseData.documents;
-
-        await redisClient.setex(cacheKey, 3600, documents); // No JSON.stringify
-        console.log("Cache miss - Stored in Redis");
-        return documents;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const getIdeaById = async (id: string) => {
-    try {
-        const cacheKey = `idea:${id}`;
-        console.log("Getting Idea by id: " + id)
-
-        const cached = await redisClient.get(cacheKey);
-        if (cached) {
-            console.log("Cache hit - Returning from Redis");
-            return cached;
-        }
-
-        const apiURL = process.env.MONGODB_API + `action/findOne?timestamp=${Date.now()}`
-        // console.log(apiURL)
-        if (!apiURL) {
-            throw new Error("API URL is not defined in the config")
-        }
-
-        const headers: any = {
-            'Content-Type': 'application/ejson',
-            'Accept': 'application/json',
-            'api-key': process.env.MONGDODB_API_KEY,
-            'Cache-Control': 'no-store, max-age=0'
-            // Add any other headers as needed
-        };
-
-        const requestBody = {
-            // Add your request body data here
-            dataSource: 'portfolio',
-            database: 'ideas',
-            collection: 'ideas',
-            filter: {
-                _id: { $oid: id }
-            }
-        };
-
-        const response = await fetch(apiURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        const document = responseData.document;
-
-        await redisClient.setex(cacheKey, 3600, document);
-        console.log("Cache miss - Stored in Redis");
-
-        return document;
-    } catch (err) {
-        console.error(err);
-    }
-}
+export const getIdeaById = (id: string) =>
+    findOne('ideas', id, 'ideas').catch(e => (console.error(e), null))
